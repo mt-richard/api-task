@@ -12,46 +12,92 @@
 
    
     <h2>Login </h2>
-    <form action="/login" method="post">
-        <input type="text" name="email" id=""><br>
-        <input type="password" name="password" id=""><br>
-        <input type="submit" name="Login"  value="LOGIN" id="">
+    <form id="loginForm">
+        <input type="email" name="email" id="email" required><br>
+        <input type="password" name="password" id="" required><br>
+        <input type="submit" name="Login"  value="" id="submit">
     </form>
+    <script>
 
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+   
+           const email = document.getElementById('email').value;
+           const password = document.getElementById('password').value;
+        //    console.log(email,password)
+         fetch('/login', {
+           method: 'POST',
+           headers: {'Content-Type': 'application/json'},
+           body: JSON.stringify({email, password})
+           })
+           .then(function(response) {
+             if (response.ok) {
+               return response.json();
+             } else {
+               throw new Error('Error: ' + response.status);
+             }
+           })
+           .then(function(data) {
+            //  alert(data.message);
+             if(data.message === 'ok'){
+                window.location.href = '/dashboard';
+             }
+           })
+           .catch(function(error) {
+             alert(error.message);
+           });
+       });
+     </script>
 <hr>
 
-    <h2>Create account </h2>
-    <form action="/signup" method="post">
-        <input type="text" name="name" id=""><br>
-        <input type="email" name="email" id=""><br>
-        <input type="password" name="password" id=""><br>
-        <input type="submit" name="Login"  value="signup" id="">
-    </form>
-</body>
-</html>
+  <h2>Signup Form</h2>
 
-<!-- <script>
-    function onsignup(e) {
-    e.preventDeault();
+  <form id="signupForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
 
-        fetch('http://localhost:5500/login', {
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <input type="submit" value="Sign Up">
+  </form>
+
+  <script>
+
+     document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var formData = new FormData();
+      const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        // console.log(name,email,password)
+        
+
+      fetch('/signup', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        }
-        
-    })
-    .then(response => response.json())
-    .then(data => {
-       jsondata = JSON.stringify(data);
-        console.log(data)
-        // alert(data.message);
-    
-    })
-    .catch(error =>{
-        console.error(error)
+        },
+        body: JSON.stringify({name, email, password})
+        })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.status);
+          }
+        })
+        .then(function(data) {
+          alert(data.message);
+        })
+        .catch(function(error) {
+          alert(error.message);
+        });
     });
-   
-}
-    
-   
-</script> -->
+  </script>
+</body>
+</html>
