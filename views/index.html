@@ -1,0 +1,57 @@
+<!-- login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   
+    <h2>Login </h2>
+    <form action="/login" method="post">
+        <input type="text" name="email" id=""><br>
+        <input type="password" name="password" id=""><br>
+        <input type="submit" name="Login"  value="LOGIN" id="">
+    </form>
+
+<hr>
+
+    <h2>Create account </h2>
+    <form action="/signup" method="post">
+        <input type="text" name="name" id=""><br>
+        <input type="email" name="email" id=""><br>
+        <input type="password" name="password" id=""><br>
+        <input type="submit" name="Login"  value="signup" id="">
+    </form>
+</body>
+</html>
+
+<!-- <script>
+    function onsignup(e) {
+    e.preventDeault();
+
+        fetch('http://localhost:5500/login', {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        
+    })
+    .then(response => response.json())
+    .then(data => {
+       jsondata = JSON.stringify(data);
+        console.log(data)
+        // alert(data.message);
+    
+    })
+    .catch(error =>{
+        console.error(error)
+    });
+   
+}
+    
+   
+</script> -->
