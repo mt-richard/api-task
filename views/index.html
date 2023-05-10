@@ -1,22 +1,68 @@
-<!-- login.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+  </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="font-family: century Gothic;">
 
-   
-    <h2>Login </h2>
-    <form id="loginForm">
-        <input type="email" name="email" id="email" required><br>
-        <input type="password" name="password" id="" required><br>
-        <input type="submit" name="Login"  value="" id="submit">
-    </form>
+  <div class="p-40 pt-20  w-full  h-[100vh] bg-gray-800">
+    <div class="w-full max-w-xs ml-[30%]">
+      
+      <form id="loginForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+         <div>
+        <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">Login Page</h3>
+        </div>
+       <div class="mb-4 pt-5">
+            <label class="block text-gray-600 text-sm font-bold mb-2" for="email">
+              Email
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" placeholder="Enter your Email adderss">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-600 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="******************">
+           
+          </div>
+          <div class="items-center justify-between">
+            <input type="submit" name="login" value="Sign In" class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              
+            
+            <div class="p-5 w-full">
+              <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+              Forgot Password?
+            </a>
+                           <p class="text-[12px] text-gray-600">If you don't have account, <a class="text-blue-500 font-bold" href="/create">SignUp</a></p>
+           
+            </div>
+            
+          </div>
+        </form>
+        <p class="text-center text-gray-500 text-xs">
+          &copy;2023  Corp. All rights reserved.
+        </p>
+      </div>
+</div>
+
     <script>
 
         document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -25,7 +71,7 @@
            const email = document.getElementById('email').value;
            const password = document.getElementById('password').value;
         //    console.log(email,password)
-         fetch('/login', {
+         fetch('/users/login', {
            method: 'POST',
            headers: {'Content-Type': 'application/json'},
            body: JSON.stringify({email, password})
@@ -40,7 +86,8 @@
            .then(function(data) {
             //  alert(data.message);
              if(data.message === 'ok'){
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
+                alert('Userd Logged')
              }
            })
            .catch(function(error) {
@@ -48,56 +95,6 @@
            });
        });
      </script>
-<hr>
-
-  <h2>Signup Form</h2>
-
-  <form id="signupForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
-
-    <input type="submit" value="Sign Up">
-  </form>
-
-  <script>
-
-     document.getElementById('signupForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      var formData = new FormData();
-      const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        // console.log(name,email,password)
-        
-
-      fetch('/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name, email, password})
-        })
-        .then(function(response) {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('Error: ' + response.status);
-          }
-        })
-        .then(function(data) {
-          alert(data.message);
-        })
-        .catch(function(error) {
-          alert(error.message);
-        });
-    });
-  </script>
+ 
 </body>
 </html>
