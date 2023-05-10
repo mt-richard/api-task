@@ -30,7 +30,7 @@ route.post('/add', async (req, res) => {
     try {
         const applicant = await applicants.create(req.body);
         if (applicant) {
-            res.json(applicant);
+            res.status(200).json({message: 'Application successfully added'})
         } else {
             res.status(201).json({message: 'Applicant already exists'})
         }   

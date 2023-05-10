@@ -25,7 +25,7 @@
   <div class="pl-60 pr-60 pt-10  w-full  h-full bg-gray-800">
     <div class="ml-[5%] p-10">
       
-      <form id="loginForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form id="applyForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
          <div>
         <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">Job Application Form</h3>
         <p class="pt-3">As the CEO, CTO, CMO of QWERTY Ltd, you will be responsible for providing strategic leadership, driving growth, and overseeing the overall operations of the company. You will play a pivotal role in shaping the company's vision, leading teams, and ensuring the achievement of business objectives..</p>
@@ -96,6 +96,45 @@
      
       </div>
 </div>
+
+
+
+<script>
+document.getElementById('applyForm').addEventListener('submit', function(event) {
+         event.preventDefault();
+   
+         var formData = new FormData();
+         const name = document.getElementById('name').value;
+           const email = document.getElementById('email').value;
+           const phone = document.getElementById('phone').value;
+           const position = document.querySelector('#job:checked').value;
+    
+           const link = document.getElementById('link').value;
+           console.log(name,email,position,link,phone)
+
+   
+         fetch('/applicant/add', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({name,email,position,link,phone})
+           })
+           .then(function(response) {
+             if (response.ok) {
+               return response.json();
+             } else {
+               throw new Error('Error: ' + response.status);
+             }
+           })
+           .then(function(data) {
+             alert(data.message);
+           })
+           .catch(function(error) {
+             alert(error.message);
+           });
+       });
+</script>
 
 </body>
 </html>
