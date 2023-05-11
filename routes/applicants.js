@@ -56,10 +56,12 @@ route.put('/edit/:id', async (req, res) => {
         const applicant = await applicants.findByPk(req.params.id);
         if (applicant) {
             applicant.update(req.body);
-            res.json({message: 'Data updated'})
+            res.json({status: 200, message: 'Data Updated Successfully'})
             
+        }else{
+            res.json({status: 404, message: 'Aplicant Not Found'})
         }
-        res.json({message: 'Failed to update'})
+        
     } catch (error) {
         console.error(error);
     }
@@ -71,7 +73,9 @@ route.delete('/delete/:id', async (req, res) => {
         const application = await applicants.findByPk(req.params.id)
         if (application) {
             await application.destroy();
-            res.json({message: 'Application deleted'})
+            res.json({status: 200, message: 'Application deleted'})
+        }else{
+            res.json({status: 404, message: 'Application not found'})
         }
     } catch (error) {
         console.error(error);
