@@ -32,6 +32,7 @@
             </div>
             <div class=" w-full bg-white p-10 rounded ">
                 <form class="w-full " id="signupForm">
+                  <h3 id="message" class="text-green-600 text-[16px] text-center border-b font-bold "></h3>
                     <div>
                     <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">SignUp Page</h3>
                     </div>
@@ -118,7 +119,13 @@
              }
            })
            .then(function(data) {
-             alert(data.message);
+            //  alert(data.message);
+             if (data.status == 200) {
+                 const messageElement = document.getElementById("message");
+                messageElement.innerHTML = data.message;
+             }else if (data.status === 201) {
+                  alert(data.message);
+             }
            })
            .catch(function(error) {
              alert(error.message);

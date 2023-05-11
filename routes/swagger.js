@@ -77,13 +77,7 @@
  */
 
 
- /**
-  * @swagger
-  * tags:
-  *     name: Application and applicant user
-  *     description: This Endpoint is for the job application
-  * 
-  * */
+
 
  /**
   * @swagger

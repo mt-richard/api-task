@@ -26,19 +26,24 @@ route.get('/', authenticate, async(req, res) =>{
 })
 
 route.post('/signup', async (req, res) => {
-    // const { name, email, password } = req.body;
         
     try {
         const name = req.body.name;
         const email = req.body.email;
         const password = req.body.password;
-      const insert = await users.create({ name, email, password });
-      if (insert) {
-        res.json({ message: 'User created successfully!' });
-      }
+        const exist = await users.findOne({ where: {email: email}});
+        if (exist){
+          res.json({ status: 201, message: 'Email Already Exisit' });
+
+        }else{
+            const insert = await users.create({ name, email, password });
+            if (insert) {
+              res.json({ status: 200, message: 'User created successfully! Back to Login' });
+            }
+        }
     } catch (error) {
     //   console.log(error);
-      res.status(500).json({ message: 'Error creating user' });
+      res.json({ status: 500, message: 'Error creating user' });
     }
   });
 
@@ -50,10 +55,10 @@ route.post('/login', async (req, res) =>{
     if (userlog) {
         const token = jwt.sign({ user: { email } }, secretKey, {expiresIn: '5s'});
         res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
-        res.json({message: 'ok', token: token});
+        res.json({status: 200, message: 'ok', token: token});
        
     } else {
-        res.status(201).json({message:'Invalid email or Password'})
+        res.json({status: 400, message:'Invalid email or Password'})
     }
 });
 

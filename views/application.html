@@ -25,7 +25,8 @@
   <div class="pl-60 pr-60 pt-10  w-full  h-full bg-gray-800">
     <div class="ml-[5%] p-10">
       
-      <form id="applyForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form id="applyForm" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h3 id="message" class="text-green-600 text-xl text-center border-b font-bold "></h3>
          <div>
         <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">Job Application Form</h3>
         <p class="pt-3">As the CEO, CTO, CMO of QWERTY Ltd, you will be responsible for providing strategic leadership, driving growth, and overseeing the overall operations of the company. You will play a pivotal role in shaping the company's vision, leading teams, and ensuring the achievement of business objectives..</p>
@@ -103,22 +104,28 @@
 document.getElementById('applyForm').addEventListener('submit', function(event) {
          event.preventDefault();
    
-         var formData = new FormData();
-         const name = document.getElementById('name').value;
-           const email = document.getElementById('email').value;
-           const phone = document.getElementById('phone').value;
-           const position = document.querySelector('#job:checked').value;
-    
-           const link = document.getElementById('link').value;
-           console.log(name,email,position,link,phone)
+       
+         const name = document.getElementById('name');
+           const email = document.getElementById('email');
+           const phone = document.getElementById('phone');
+           const position = document.querySelector('#job:checked');
+           const link = document.getElementById('link');
 
-   
+          const nameValue = name.value;
+          const emailValue = email.value;
+          const phoneValue = phone.value;
+          const linkValue = link.value;
+          const positionValue = position.value;
+          //  console.log(nameValue,emailValue,positionValue,linkValue,phoneValue)
+         
+
          fetch('/applicant/add', {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json'
            },
-           body: JSON.stringify({name,email,position,link,phone})
+           body: JSON.stringify({name: nameValue, email: emailValue, position: positionValue, link: linkValue, phone: phoneValue})
+
            })
            .then(function(response) {
              if (response.ok) {
@@ -128,7 +135,15 @@ document.getElementById('applyForm').addEventListener('submit', function(event) 
              }
            })
            .then(function(data) {
-             alert(data.message);
+           
+              const messageElement = document.getElementById("message");
+              messageElement.innerHTML = data.message;
+              name.value = '';
+              email.value = '';
+              phone.value = '';
+              position.checked = false;
+              link.value = '';
+            
            })
            .catch(function(error) {
              alert(error.message);
