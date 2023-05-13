@@ -2,8 +2,9 @@ const express = require("express")
 const {users} = require('../models/index');
 const jwt = require('jsonwebtoken');
 const route = express.Router()
+require('dotenv').config();
 
- const secretKey = 'mysecretkey';
+ const secretKey = process.env.JWT_SECRET;
  function authenticate(req, res, next) {
    const token = req.cookies.token;
  //   const token = req.headers['authorization'];

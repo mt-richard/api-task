@@ -21,62 +21,42 @@
 </head>
 <body style="font-family: century Gothic;">
     
-    <div class="pr-40 pl-40 pt-14 h-[100vh] w-full bg-gray-800">
+    <div class="pr-60 pl-60 pt-14 h-[100vh] w-full bg-gray-800">
 
 
         <div class="flex  w-full pt-20">
-            <div class="w-3/4 pt-20 p-5 ">
+            <div class="w-1/2 pt-20 p-5 ">
                 <h3 class="p-4 text-gray-300 font-bold text-2xl">Online Eve IAP</h3>
                 <p class=" text-gray-200 font-light p-4 leading-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis illo suscipit nulla ducimus sunt, molestias, explicabo voluptas nostrum rem autem id odio ex nihil dolorum error fugiat voluptates aut fugit?</p>
                 <a href="/"><button class="ml-5 pr-10 pl-10 mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  type="submit">Sign In</button></a>
             </div>
-            <div class=" w-full bg-white p-10 rounded ">
+            <div class=" w-2/5 bg-white p-10 rounded ">
                 <form class="w-full " id="signupForm">
                   <h3 id="message" class="text-green-600 text-[16px] text-center border-b font-bold "></h3>
                     <div>
                     <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">SignUp Page</h3>
                     </div>
-                        <div class="flex flex-wrap pt-5 -mx-3">
-                        <div class="w-full  px-3 ">
-                            <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
-                            Full Name
-                            </label>
-                            <input class="text-xs block w-full bg-gray-200 text-gray-700 border  rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" name="name" type="text" placeholder="Full Name">
-                            
-                        </div>
-                        </div>
-                        <div class="flex -mx-3">
-                            <div class="w-full  px-3">
+                       
+                            <div class="w-full  px-3 pt-5 p-2">
+                                <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
+                                Full Name
+                                </label>
+                                <input class="text-xs block w-full bg-gray-200 text-gray-700 border  rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" name="name" type="text" placeholder="Full Name">
+                            </div>
+                        
+                            <div class="w-full  px-3 p-2">
                                 <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
                                 Email
                                 </label>
                                 <input class="text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" name="email" type="email" placeholder="Email adderss">
                             </div>
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
-                            Phone
-                            </label>
-                            <input class="text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="number" placeholder="+2570787654212">
-                        </div>
-                        </div>
-                        
-                        <div class="flex -mx-3">
-                            <div class="w-full  px-3">
-                                <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
-                                Username
-                                </label>
-                                <input class="text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="username" name="username" type="text" placeholder="Your Username adderss">
-                            </div>
-                            <div class="w-full px-3">
+                            <div class="w-full px-3 p-5">
                                 <label class="block uppercase tracking-wide text-gray-900 text-xs" for="">
                                 Password
                                 </label>
                                 <input class="text-xs block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="password" name="password" type="password" placeholder="************">
                             </div>
-                        </div>
-                       
-            
-                        <div class=" w-full px-3 ">
+                          <div class=" w-full px-3 p-2 ">
                             <input type="submit" name="adduser" value="Sign Up" class=" w-4/5 ml-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                             
                             <div class="pb-1 text-center p-5">
@@ -98,9 +78,9 @@
          event.preventDefault();
    
          var formData = new FormData();
-         const name = document.getElementById('name').value;
-           const email = document.getElementById('email').value;
-           const password = document.getElementById('password').value;
+         const name = document.getElementById('name');
+           const email = document.getElementById('email');
+           const password = document.getElementById('password');
            // console.log(name,email,password)
            
    
@@ -109,7 +89,7 @@
            headers: {
                'Content-Type': 'application/json'
            },
-           body: JSON.stringify({name, email, password})
+           body: JSON.stringify({name:name.value, email:email.value, password:password.value})
            })
            .then(function(response) {
              if (response.ok) {
@@ -123,6 +103,9 @@
              if (data.status == 200) {
                  const messageElement = document.getElementById("message");
                 messageElement.innerHTML = data.message;
+                name.value = '';
+                email.value = '';
+                password.value = '';
              }else if (data.status === 201) {
                   alert(data.message);
              }
