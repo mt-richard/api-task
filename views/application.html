@@ -16,16 +16,15 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Form</title>
 </head>
 <body style="font-family: century Gothic;">
 
   <div class="pl-60 pr-60 pt-10  w-full  h-full bg-gray-800">
-    <div class="ml-[5%] p-10">
+    <div class="ml-[5%] p-10 ">
       
-      <form id="applyForm" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form id="applyForm" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 pr-28 pl-28 mb-4">
         <h3 id="message" class="text-green-600 text-xl text-center border-b font-bold "></h3>
          <div>
         <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">Job Application Form</h3>
@@ -138,6 +137,7 @@ document.getElementById('applyForm').addEventListener('submit', function(event) 
            
               const messageElement = document.getElementById("message");
               messageElement.innerHTML = data.message;
+            
               name.value = '';
               email.value = '';
               phone.value = '';

@@ -22,8 +22,13 @@ require('dotenv').config();
  }
 
 route.get('/', authenticate, async(req, res) =>{
+  try {
     const allusers = await users.findAll()
     res.json(allusers);
+  } catch (error) {
+    console.error(error)
+  }
+    
 })
 
 route.post('/signup', async (req, res) => {

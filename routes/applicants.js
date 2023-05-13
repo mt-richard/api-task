@@ -37,7 +37,7 @@ route.post('/add', async (req, res) => {
             ]
           }});
         if (exists) {
-            res.json({status:'200',message: 'Email or  Name or Phone Already used'})
+            res.json({status:'201',message: 'Email or  Name or Phone Already used'})
         } else {
             const applicant = await applicants.create(req.body);
             if (applicant) {
