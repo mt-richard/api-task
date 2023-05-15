@@ -83,5 +83,18 @@ route.delete('/delete/:id', async (req, res) => {
     
 })
 
+route.get('/applied/:option', async(req, res) =>{
+    try {
+        const apply = await applicants.count({where: {position: req.params.option}})
+        if (apply) {
+            res.json(apply)
+        }else{
+            res.json({status: 404, message: 'No applicants found'})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+    
+})
 
 module.exports = route

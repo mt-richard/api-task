@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,62 +17,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body class="bg-gray-800" style="font-family: century Gothic;">
-    <script>
-    
-             fetch('http://localhost:3300/applicant', {
-                 method: 'GET',
-                 headers: {
-                     'Content-Type': 'application/json'
-    
-                 }
-             })
-             .then(response => response.json())
-             .then(data => {
-                // const users = document.getElementById('users');
-                // jsondata = JSON.stringify(data);
-                // users.innerHTML = jsondata.name;
-                 console.log(data)
-                
-                 const dataTable = document.getElementById('dataTable');
-                 data.forEach(item => {
-                    const row = document.createElement('tr');
-                    const idCell = document.createElement('td');
-                    idCell.textContent = item.id;
-                    const nameCell = document.createElement('td');
-                    nameCell.textContent = item.name;
-                    const emailCell = document.createElement('td');
-                    emailCell.textContent = item.email;
-                    const phoneCell = document.createElement('td');
-                    phoneCell.textContent = item.phone;
-                    const positionCell = document.createElement('td');
-                    positionCell.textContent = item.position;
-                    const linkCell = document.createElement('td');
-                    linkCell.textContent = item.link;
-                 
-                    row.appendChild(idCell);
-                    row.appendChild(nameCell);
-                    row.appendChild(emailCell);
-                    row.appendChild(phoneCell);
-                    row.appendChild(positionCell);
-                    row.appendChild(linkCell);
-                 
-                    dataTable.querySelector('tbody').appendChild(row);
-                });
-             })
-             .catch(error =>{
-                 console.error(error)
-             });
-            
-            
-     </script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>System | Admin </title>
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
 
-        <a href="logout" >Logout</a>
-        <h1>All Applicants</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eligendi ratione vitae nulla est? Dolorum, vel. Aspernatur harum, voluptatum dolor minus vel vero.</p>
-        <div class="bg-gray-800 pr-40 pl-40">
+</head>
+<body style="font-family: century Gothic;">
+
+    <div class="flex h-[100vh]">
+        <div class="sidebar bg-gray-800 w-[300px]">
+                <h4 class="p-5 font-bold text-center text-gray-200 text-3xl border-b">APPILCATION</h4>
+                
+                <div class="sidebar-nav p-5 pr-0 ">
+                    <ul>
+                        <li class="p-2 text-gray-300 cursor-pointer hover:bg-gray-300 hover:text-blue-500 hover:font-normal w-full mb-2 rounded-l-xl font-light"><a  style=" text-decoration: none;" class="active" href="/dashboard" ><span><i style="padding:0 1rem; " class="fas fa-window-restore"></i>Dashboard</span></a></li>
+                        <li class="p-2  cursor-pointer hover:bg-gray-300 hover:text-blue-500 hover:font-normal bg-gray-300 text-blue-500 font-normal  w-full mb-2 rounded-l-xl font-light"><a  style=" text-decoration: none;" href="/applicants"><span><i  style="padding:0 1rem; " class="fas fa-archive"></i>Applicants</span></a></li>
+                        <li class="p-2 text-gray-300 cursor-pointer hover:bg-gray-300 hover:text-blue-500 hover:font-normal w-full mb-2 rounded-l-xl font-light"><a  style=" text-decoration: none;"  href="/profile"><span><i  style="padding:0 1rem; " class="fas fa-archive"></i>Profile</span></a></li>
+                        <li class="p-2 text-gray-300 cursor-pointer hover:bg-gray-300 hover:text-blue-500 hover:font-normal w-full mb-2 rounded-l-xl font-light"><a  style=" text-decoration: none;" href="../"><span><i  style="padding:0 1rem; " class="fas fa-sign-out-alt"></i>Logout</span></a></li>
+                    </ul>
+                </div>
+        </div>
+        <div class="main-content pl-10 pr-10 p-2 w-full bg-gray-300">
+            <div class="flex w-full justify-between border-b border-gray-400">
+                <h4 class=" text-xl text-gra-600 p-2">All Applicants </h4>
+               
+                <div class="flex">
+                    <img src="/images/user.png" alt="" class="w-10 h-10 rounded-full">
+                    <h6 class="p-2">Admin</h6>
+                    <!-- <button class="cur
+                     font-bold">V</button> -->
+                </div>
+            </div>
+            <div class="main p-10">
+                <h1 class="p-3 font-bold text-gray-700">All Applicants</h1>
+        <p class="p-3 pb-5 leading-tight text-gra-600">Here, are the all applicants details requested via Application form.</p>
+        <div class=" pr-20 pl-20">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table  id="dataTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -111,17 +91,76 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="pl-2 pr-2">
                         
-                        
-                       
                     </tbody>
                 </table>
             </div>
         </div>
-            
+                   
 
+            </div>
+
+        </div>
+    
+    </div>
+   
 </body>
 </html>
 
 
+    <script>
+    
+             fetch('http://localhost:3300/applicant', {
+                 method: 'GET',
+                 headers: {
+                     'Content-Type': 'application/json'
+    
+                 }
+             })
+             .then(response => response.json())
+             .then(data => {
+                // const users = document.getElementById('users');
+                // jsondata = JSON.stringify(data);
+                // users.innerHTML = jsondata.name;
+                 console.log(data)
+                
+                 const dataTable = document.getElementById('dataTable');
+                 data.forEach(item => {
+                    const row = document.createElement('tr');
+                    const idCell = document.createElement('td');
+                    idCell.textContent = item.id;
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = item.name;
+                    const emailCell = document.createElement('td');
+                    emailCell.textContent = item.email;
+                    const phoneCell = document.createElement('td');
+                    phoneCell.textContent = item.phone;
+                    const positionCell = document.createElement('td');
+                    positionCell.textContent = item.position;
+                    const linkCell = document.createElement('td');
+                    linkCell.textContent = item.link;
+                    const deleteCell = document.createElement('td');
+                    deleteCell.innerHTML = `<a class= "text-red-400 font-bold" onclick="return deleteCell();" href="${item.id}">Delete</a>`;
+                 
+                    row.appendChild(idCell);
+                    row.appendChild(nameCell);
+                    row.appendChild(emailCell);
+                    row.appendChild(phoneCell);
+                    row.appendChild(positionCell);
+                    row.appendChild(linkCell);
+                    row.appendChild(deleteCell);
+                 
+                    dataTable.querySelector('tbody').appendChild(row);
+                });
+             })
+             .catch(error =>{
+                 console.error(error)
+             });
+
+
+
+             function deleteCell(){
+                 confirm('Are you sure you want to delete')
+             }
+     </script>

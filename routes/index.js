@@ -22,6 +22,11 @@ route.get('/applicants', function(req, res) {
     res.sendFile(filePath);
 });
 
+route.get('/dashboard', function(req, res) {
+    const filePath = path.join(__dirname, '..', 'views', 'dashboard.html');
+    res.sendFile(filePath);
+});
+
 route.get('/logout', (req, res) => {
     res.cookie('token', '', { expires: new Date(0) });
     res.redirect('/');
