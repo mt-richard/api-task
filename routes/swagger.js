@@ -74,6 +74,65 @@
  *         description: Invalid request data
  *       500:
  *         description: Internal server error
+ * 
+ * /users/delete/{userId}:
+ *   delete:
+ *     summary: Delete user by ID
+ *     tags:  [UsersController]
+ *     description: delete a user using his/her ID
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Numerical ID required
+ *         required: true
+ *         schema:
+ *           type: integer
+ * 
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       400:
+ *         description: Invalid request data
+ *       500:
+ *         description: Internal server error
+ * 
+ * 
+ * 
+ * /users/update/{userId}:
+ *   patch:
+ *     summary: Update User by ID
+ *     tags:  [UsersController]
+ *     description: Modifying user info based in ID
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Numerical ID required   
+ *         required: true
+ *         schema:
+ *          type: integer    
+ *       - name: user
+ *         in: body
+ *         description: The user object
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name: 
+ *               type: string   
+ *             email:
+ *               type: string
+ *               format: email
+ *             password:
+ *               type: string
+ *               format: password
+ *     responses:
+ *       201:
+ *         description: User Updated successfully
+ *       400:
+ *         description: Invalid request data
+ *       500:
+ *         description: Internal server error
+ * 
  */
 
 
