@@ -43,7 +43,7 @@
                
                 <div class="flex">
                     <img src="/images/user.png" alt="" class="w-10 h-10 rounded-full">
-                    <h6 class="p-2" id="userlog">Admin</h6>
+                    <h6 class="p-2" id="userlog"></h6>
                     <!-- <button class="cur
                      font-bold">V</button> -->
                 </div>
@@ -53,9 +53,9 @@
         <p class="p-3 pb-5 leading-tight text-gra-600">Here, are the all info you provided during account creatation, so you can update it if you want.</p>
         <div class=" pr-20 pl-20">
             <form class="w-full " id="signupForm">
-                <h3 id="message" class="text-green-600 text-[16px] text-center border-b font-bold "></h3>
+                <h3 id="message" class="text-green-600 text-[16px] text-center  font-bold "></h3>
                   <div>
-                  <h3 class="p-4 text-gray-700 font-bold text-xl border-b text-center">Profile Page</h3>
+                  <h3 class="p-4 text-gray-700 font-bold text-xl  text-center">Profile Page</h3>
                   </div>
                      
                           <div class="w-full  px-3 pt-5 p-2">
@@ -93,7 +93,8 @@
 
 
     <script>
-
+           
+        
     document.getElementById('signupForm').addEventListener('submit', function(event) {
          event.preventDefault();
    
@@ -101,8 +102,20 @@
            const email = document.getElementById('email');
            const password = document.getElementById('password');
            // console.log(name,email,password)
-           console.log(req.user.id)
-         fetch(`http://localhost:3300/users/update/${req.user.id}`, {
+          //  const userId = document.getElementById('userid');
+          fetch('http://localhost:3300/users/islogged')
+          .then(response => response.json())
+          .then(data => {
+              // console.log(data.status)
+              
+              if (data.status === 401) {
+                  window.location.href = '/'
+              } else {
+                  const userlog = document.getElementById('userlog')
+                  userlog.innerHTML = data.user.name
+                 const myid = data.user.id;
+
+         fetch(`http://localhost:3300/users/update/${data.user.id}`, {
            method: 'PATCH',
            headers: {
                'Content-Type': 'application/json'
@@ -119,11 +132,14 @@
            .then(function(data) {
             //  alert(data.message);
              if (data.status == 200) {
-                 const messageElement = document.getElementById("message");
+                const messageElement = document.getElementById("message");
                 messageElement.innerHTML = data.message;
                 name.value = '';
                 email.value = '';
                 password.value = '';
+                setTimeout(() => {
+                  window.location.reload();
+                }, 5000);
              }else if (data.status === 201) {
                   alert(data.message);
              }
@@ -131,6 +147,13 @@
            .catch(function(error) {
              alert(error.message);
            });
+
+          }
+          })
+
+           
        });
+
+      
      </script>
      <script src="getToken.js"></script>

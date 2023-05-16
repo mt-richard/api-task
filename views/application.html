@@ -35,19 +35,19 @@
             <label class="block text-gray-600 text-sm font-bold mb-2" for="email">
               Name <span class="text-red-500 text-xl font-bold">*</span>
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" placeholder="Enter your Names">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" placeholder="Enter your Names" required>
           </div>
           <div class="mb-4 pt-5">
             <label class="block text-gray-600 text-sm font-bold mb-2" for="email">
               Email <span class="text-red-500 text-xl font-bold">*</span>
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" placeholder="Enter your Email adderss">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" placeholder="Enter your Email adderss" required>
           </div>
           <div class="mb-6">
             <label class="block text-gray-600 text-sm font-bold mb-2" for="password">
               Phone Number <span class="text-red-500 text-xl font-bold">*</span>
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="number" name="phone" placeholder="+250787654212">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="number" name="phone" placeholder="+250787654212" required>
            
           </div>
           <div class="mb-6">
@@ -77,14 +77,14 @@
             <label class="block text-gray-600 text-sm font-bold mb-2" for="password">
                 Submit your cover letter or resume link <span class="text-red-500 text-xl font-bold">*</span>
             </label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="link" name="link" placeholder="Enter the link"></textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-2 text-gray-600 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="link" name="link" placeholder="Enter the link" required></textarea>
            
           </div>
 
 
           <div class="items-center justify-between flex">
             <input type="submit" name="login" value="Submit" class="bg-blue-500 w-1/6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-            <input type="submit" name="" value="Clear All" class="bg-blue-300 w-1/6 hover:bg-blue-700 text-grey-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button  onclick="window.location.reload();" class="bg-blue-300 w-1/6 hover:bg-blue-700 text-grey-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Clear All</button>
               
             </div>
             <div class="p-5 w-full">

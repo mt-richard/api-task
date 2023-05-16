@@ -42,6 +42,8 @@ route.get('/islogged', authenticate, async(req, res) =>{
     
 })
 
+
+
 route.post('/signup', async (req, res) => {
         
     try {
@@ -78,6 +80,20 @@ route.post('/login', async (req, res) =>{
         res.json({status: 400, message:'Invalid email or Password'})
     }
 });
+
+route.get('/:id', authenticate, async(req, res) =>{
+  try {
+    const selecteduser = await users.findByPk(req.params.id)
+    if (!selecteduser) {
+        return res.json({status: 404, message: 'Not Found'})
+    }else {
+        res.json({selecteduser, user: req.user});
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  
+})
 
 route.delete('/delete/:id', authenticate, async (req, res) => {
   try {
