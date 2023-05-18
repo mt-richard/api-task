@@ -23,7 +23,6 @@ require('dotenv').config();
 
 route.get('/', authenticate, async(req, res) =>{
   try {
-   
     const allusers = await users.findAll()
     res.json({allusers, user: req.user});
   } catch (error) {
@@ -41,8 +40,6 @@ route.get('/islogged', authenticate, async(req, res) =>{
   }
     
 })
-
-
 
 route.post('/signup', async (req, res) => {
         
@@ -74,7 +71,7 @@ route.post('/login', async (req, res) =>{
     if (userlog) {
         const token = jwt.sign({ user: { id:userlog.id, name:userlog.name } }, secretKey, {expiresIn: '5m'});
         res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
-        res.json({status: 200, message: 'ok', token: token});
+        res.json({status: 200, message: 'User Logged Success..', token: token});
        
     } else {
         res.json({status: 400, message:'Invalid email or Password'})

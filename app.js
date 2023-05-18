@@ -2,6 +2,7 @@ const express = require("express")
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const swagger = require('./swagger');
+const cors = require('cors')
 require('dotenv').config();
 const app = express()
 swagger(app);
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));

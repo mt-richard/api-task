@@ -3,12 +3,55 @@ const {applicants} = require('../models/index');
 const route = express.Router()
 const { Op } = require('sequelize');
 
+const secretKey = process.env.JWT_SECRET;
+function authenticate(req, res, next) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.json({status:401, message: 'Authorization header missing' });
+  }
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.json({ status:401,message: 'Token is not valid' });
+    }
+    req.user = decoded.user;
+    next();
+  });
+}
+
+
+
 route.get('/', async (req, res) => {
     try {
         const allapplicants = await applicants.findAll();
         res.json(allapplicants);
     } catch (error) {
         console.error(error);
+    }
+    
+})
+
+
+route.post('/add', async (req, res) => {
+    try {
+        const exists = await applicants.findOne({where: { 
+            [Op.or]: [
+              { email: req.body.email },
+              { name: req.body.name },
+              { phone: req.body.phone }
+            ]
+          }});
+        if (exists) {
+            res.json({status:'201',message: 'Email or  Name or Phone Already used'})
+        } else {
+            const applicant = await applicants.create(req.body);
+            if (applicant) {
+                res.json({message: 'Application successfully added', status:'200'})
+            } 
+        }
+         
+    } catch (error) {
+        console.error(error)
     }
     
 })
@@ -24,29 +67,6 @@ route.get('/:id', async (req, res) => {
         
     } catch (error) {
         console.error(error);
-    }
-    
-})
-route.post('/add', async (req, res) => {
-    try {
-        const exists = await applicants.findOne({where: { 
-            [Op.or]: [
-              { email: req.body.email },
-              { name: req.body.name },
-              { phone: req.body.phone }
-            ]
-          }});
-        if (exists) {
-            res.json({status:'201',message: 'Email or  Name or Phone Already used'})
-        } else {
-            const applicant = await applicants.create(req.body);
-            if (applicant) {
-                res.json({status:'200',message: 'Application successfully added'})
-            } 
-        }
-         
-    } catch (error) {
-        console.error(error)
     }
     
 })

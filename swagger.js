@@ -4,7 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const options = {
   swaggerDefinition: {
     info: {
-      title: 'My API Documentation',
+      title: 'JOB APPLICATION API',
       version: '1.0.0',
       description: 'API documentation using Swagger',
     },
